@@ -2,23 +2,21 @@
 
 - label: 'Introduction'
   link: '/'
-- label: 'Getting started'
-  link: '/getting-started'
-- label: Usage
+- label: 'Quickstart'
+  link: '/quickstart'
+- label: API
   items:
-    - label: 'Creating docs'
-      link: '/usage/creating-docs'
-    - label: 'Navigation'
-      link: '/usage/navigation'
-    - label: 'Shadowing'
-      link: '/usage/shadowing'
-- label: More
-  items:
-    - label: FAQ
-      link: /faq
-    - label: Changelog
-      link: /changelog
+    - label: 'User'
+      link: '/api/user'
+    - label: 'OCR'
+      link: '/api/ocr'
+    - label: 'Deck'
+      link: '/api/deck'
+    - label: 'Class'
+      link: '/api/class'
 - label: Community
   items:
+    - label: 'Contributing'
+      link: '/community/contributing'
     - label: 'Github'
       link: https://github.com/jadeocr/docs

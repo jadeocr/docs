@@ -1,0 +1,148 @@
+---
+title: 'User'
+description: The jadeocr user API
+---
+
+The jadeocr user API is responsible for handling authentication and user details.
+
+
+## Creating a user (signing up)
+
+### Request
+To create a user, send a POST request to `https://api.jadeocr.com/api/signup` with
+the following parameters.
+
+|       Key       |        Example Value        |
+|-----------------|-----------------------------|
+| email           | "test@test.com"             |
+| firstName       | "jadeocr"                   |
+| lastName        | "developer"                 |
+| password        | "correcthorsebatterystaple" |
+| confirmPassword | "correcthorsebatterystaple" |
+
+### Response
+If you do not get a code `200` response, then the server sends an error message
+in the response.
+
+
+## Authenticating (logging in)
+
+### Request
+To sign in, send a POST request to `https://api.jadeocr.com/api/signin`
+
+|       Key       |        Example Value        |
+|-----------------|-----------------------------|
+| email           | "test@test.com"             |
+| password        | "correcthorsebatterystaple" |
+
+### Response
+If you sign in successfully, you should get the `user` object, which looks
+something like this. You can also get this object by using the [user basic
+information](#user-basic-information) route.
+```json
+{
+    "_id": "5fd8251c8149c1516f92345a",
+    "email": "test@test.com",
+    "firstName": "jadeocr",
+    "lastName": "developer",
+    "password": "$2a$10$BgNwN8fgPToiGFYd/V4uxu0YL9nv5lUClsw/ZFP3snpUep61Mw8j6",
+    "isTeacher": false,
+    "__v": 0
+}
+```
+Otherwise, the server will send an error message in the response. When you sign
+in, the server generates a cookie that is _essential_ for user-specific requests
+(getting decks, joining classes, etc.).
+
+**Note:** These docs will specify sending the cookie in the request as sending
+the request "with credentials." If you receive a `401` response in a request,
+not sending the cookie is the most likely reason. In
+[Axios](https://www.npmjs.com/package/axios), add `{ withCredentials: true }`
+to the request to automatically send the cookie.
+
+
+## Deauthenticating (signing out)
+
+### Request
+To sign out, send a POST request with credentials to `https://api.jadeocr.com/api/signout`.
+
+### Response
+If you have been previously authenticated, the server will send a `200` response.
+Otherwise, you have not been authenticated and there is no need to sign out.
+
+
+## User (basic information)
+This route sends the basic user information, such as the user ID, email, name,
+and teacher status. If you want to get all the information about a user, use
+the [user detailed](#user-detailed-information) endpoint instead.
+
+### Request
+To get the `user` object (the same object returned by the [authentication](#authenticating-logging-in)
+route `https://api.jadeocr.com/api/signin`), send a GET request with credentials to
+`https://api.jadeocr.com/api/user`.
+
+### Response
+If you are authenticated, the response should look like this:
+```json
+{
+    "_id": "5fd8251c8149c1516f92345a",
+    "email": "test@test.com",
+    "firstName": "jadeocr",
+    "lastName": "developer",
+    "password": "$2a$10$BgNwN8fgPToiGFYd/V4uxu0YL9nv5lUClsw/ZFP3snpUep61Mw8j6",
+    "isTeacher": false,
+    "__v": 0
+}
+```
+
+
+## User (detailed information)
+There is also a much more detailed information endpoint available, which sends
+all the information associated with a user. This includes classes, decks, stats,
+all quizzes, and more.
+
+### Request
+Send a GET request with credentials to `https://api.jadeocr.com/api/user/details`.
+
+### Response
+If you are authenticated, the response should look like this:
+
+**Note:** The response can _easily_ be tens of thousands of lines long! Don't
+call this route unless you need to; read the [deck](/api/deck) and [class](/api/class)
+pages to learn how to get data for decks, reviews, classes, and more.
+```json
+{
+    "classes": [
+        "259395"
+    ],
+    "classesTeaching": [],
+    "stats": [],
+    "_id": "5fd8251c8149c1516f92345b",
+    "id": "5fd8251c8149c1516f92345a",
+    "email": "test@test.com",
+    "firstName": "Tanay",
+    "lastName": "Biradar",
+    "password": "$2a$10$fr7gsqfkAH2gew9czPEGzOz1sg5OKjbrkQ7tp3QwU/djvv/X4TcRS",
+    "isTeacher": false,
+    "decks": [
+        {
+            "isOwner": true,
+            "learned": false,
+            "_id": "5fea66a4635ae125b03e7283",
+            "deckId": "5fea66a4635ae125b03e727f",
+            "deckName": "Midterm Vocabulary",
+            "deckDescription": "Vocabulary for the DLS 2020 spring midterm",
+            "latestAccessDate": 1609381463913,
+            "quizAttempts": [ // an array of all quiz attempts
+              ...
+            ],
+            "srs": [ // an array of all review attempts
+              ...
+            ],
+            "totalQuizAttempts": 168
+        }
+        ...
+    ],
+    "__v": 274
+}
+```

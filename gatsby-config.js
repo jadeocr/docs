@@ -3,7 +3,7 @@ module.exports = {
     siteTitle: `jadeocr docs`,
     defaultTitle: `jadeocr docs`,
     siteTitleShort: `jadeocr docs`,
-    siteDescription: `API documentation for jadeocr`,
+    siteDescription: `Documentation for jadeocr`,
     siteUrl: `https://docs.jadeocr.com`,
     siteAuthor: `Tanay Biradar`,
     siteImage: `/banner.png`,
