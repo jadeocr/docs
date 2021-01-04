@@ -3,5 +3,45 @@ title: 'OCR'
 description: The jadeocr handwriting OCR API
 ---
 
-Hello
+The jadeocr OCR API is at the heart of what jadeocr was made to do: help language
+learners practice their handwriting.
 
+
+## Handwriting Recognition
+
+The handwriting recognition API handles detecting handwriting in Simplified
+Chinese, Traditional Chinese, and Japanese.
+
+### Preparing the data
+The handwriting recognition API works on a _stroke array_, which can be generated
+with an HTML canvas or similar tools. Send the array as a string in the request.
+
+Here is a sample stroke array for the character "口":
+
+```json
+[[(75,128),(83,172),(85,196)],[(84,127),(91,124),(123,121),(151,121),(161,121),(161,128),(165,157),(164,181),(162,195)],[(89,187),(103,194),(129,200),(149,199)]]
+```
+
+### Request
+Send a POST request to `https://api.jadeocr.com/api/ocr` with the following body:
+
+|       Key       |            Value            |
+|-----------------|-----------------------------|
+| strokes         | myStrokeArray               |
+
+
+### Response
+The response contains an array of predictions from most confident to least
+confident.
+```json
+[
+    "囗",
+    "口",
+    "日",
+    "卲",
+    "叩",
+    "凵",
+    "乜",
+    "公"
+]
+```

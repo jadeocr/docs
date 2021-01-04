@@ -3,4 +3,53 @@ title: 'Class'
 description: The jadeocr class API
 ---
 
-Hello
+The jadeocr class API handles teachers, students, assignments, and other
+functions to make jadeocr easier to use in the classroom.
+
+## Assign Decks
+
+### Request
+
+Send a POST request to `https://api.jadeocr.com/api/class/assign` with the
+following body. Make sure to read the following table carefully:
+
+|     Key     |        Example Value       | Description                               | Accepted Values                                    | Default | Required | Notes                                                                               |
+|-------------|----------------------------|-------------------------------------------|----------------------------------------------------|---------|----------|-------------------------------------------------------------------------------------|
+| classCode   | 123456                     | 6-digit class code                        |                                                    |         | true     |                                                                                     |
+| deckId      | "5fd8251c8149c1516f92345a" | Unique deck ID to assign                  |                                                    |         | true     |                                                                                     |
+| mode        | "learn"                    | Review mode to assign students            | "learn", "srs", "quiz"                             |         | true     |                                                                                     |
+| handwriting | true                       | Enable handwriting                        | true, false                                        | false   | false    | Value is ignored if the mode is "quiz"                                              |
+| front       | "pinyin"                   | Which value to show on the front of cards | "character", "pinyin", "definition", "handwriting" |         | true     | Cannot be "handwriting" if the mode is "quiz"                                       |
+| scramble    | true                       | Scramble the order of cards               | true, false                                        | false   | false    | _Only_ send this value if the mode is "learn"; doing otherwise may result in errors |
+| repetitions | 3                          | Number of reviews to assign               |                                                    | 1       | false    |                                                                                     |
+| dueDate     | 1609719690223              | UNIX epoch time in ms                     |                                                    |         | true     |                                                                                     |
+
+### Response
+
+> This section is not finished yet.
+
+
+## Submit reviewed deck (students only)
+
+### Request
+
+Send a POST request to `https://api.jadeocr.com/api/class/TO_BE_DETERMINED` with the
+following body. Make sure to read the following table carefully. All values
+are required.
+
+|     Key     |        Example Value       | Description                                                                | Accepted Values                                    | Notes                           |
+|-------------|----------------------------|----------------------------------------------------------------------------|----------------------------------------------------|---------------------------------|
+| classCode   | 123456                     | 6-digit class code                                                         |                                                    |                                 |
+| deckId      | "5fd8251c8149c1516f92345a" | Unique deck ID to assign                                                   |                                                    |                                 |
+| mode        | "learn"                    | Review mode to assign students                                             | "learn", "srs", "quiz"                             |                                 |
+| quizResults | myQuizResults              | An object with the quiz results, see [Deck API](/api/deck) for examples    |                                                    | Only needed if mode is "quiz"   |
+
+### Response
+
+> This section is not finished yet.
+
+### Note: Client development
+When students review, make one call to this route to add the data to the class,
+then make another call using the [Deck API](/api/deck) to add the results
+to the student's personal stats.
+

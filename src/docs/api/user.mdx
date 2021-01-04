@@ -10,13 +10,13 @@ The jadeocr user API is responsible for handling authentication and user details
 
 ### Request
 To create a user, send a POST request to `https://api.jadeocr.com/api/signup` with
-the following parameters.
+the following parameters:
 
 |       Key       |        Example Value        |
 |-----------------|-----------------------------|
-| email           | "test@test.com"             |
-| firstName       | "jadeocr"                   |
-| lastName        | "developer"                 |
+| email           | "houyi@example.com"         |
+| firstName       | "e"                         |
+| lastName        | "chang"                     |
 | password        | "correcthorsebatterystaple" |
 | confirmPassword | "correcthorsebatterystaple" |
 
@@ -28,11 +28,12 @@ in the response.
 ## Authenticating (logging in)
 
 ### Request
-To sign in, send a POST request to `https://api.jadeocr.com/api/signin`
+To sign in, send a POST request to `https://api.jadeocr.com/api/signin` with
+the following parameters:
 
 |       Key       |        Example Value        |
 |-----------------|-----------------------------|
-| email           | "test@test.com"             |
+| email           | "houyi@example.com"         |
 | password        | "correcthorsebatterystaple" |
 
 ### Response
@@ -42,10 +43,10 @@ information](#user-basic-information) route.
 ```json
 {
     "_id": "5fd8251c8149c1516f92345a",
-    "email": "test@test.com",
-    "firstName": "jadeocr",
-    "lastName": "developer",
-    "password": "$2a$10$BgNwN8fgPToiGFYd/V4uxu0YL9nv5lUClsw/ZFP3snpUep61Mw8j6",
+    "email": "houyi@example.com",
+    "firstName": "e",
+    "lastName": "chang",
+    "password": "$2y$12$9gLN.tnLDgIZQmEOkv9ZkOrBSnWc8bVaGdmKQzwX06zoJtSNlfEky",
     "isTeacher": false,
     "__v": 0
 }
@@ -64,7 +65,7 @@ to the request to automatically send the cookie.
 ## Deauthenticating (signing out)
 
 ### Request
-To sign out, send a POST request with credentials to `https://api.jadeocr.com/api/signout`.
+To sign out, send an empty POST request with credentials to `https://api.jadeocr.com/api/signout`.
 
 ### Response
 If you have been previously authenticated, the server will send a `200` response.
@@ -86,10 +87,10 @@ If you are authenticated, the response should look like this:
 ```json
 {
     "_id": "5fd8251c8149c1516f92345a",
-    "email": "test@test.com",
-    "firstName": "jadeocr",
-    "lastName": "developer",
-    "password": "$2a$10$BgNwN8fgPToiGFYd/V4uxu0YL9nv5lUClsw/ZFP3snpUep61Mw8j6",
+    "email": "houyi@example.com",
+    "firstName": "e",
+    "lastName": "chang",
+    "password": "$2y$12$9gLN.tnLDgIZQmEOkv9ZkOrBSnWc8bVaGdmKQzwX06zoJtSNlfEky", // bcrypt 喵
     "isTeacher": false,
     "__v": 0
 }
@@ -113,16 +114,16 @@ pages to learn how to get data for decks, reviews, classes, and more.
 ```json
 {
     "classes": [
-        "259395"
+        "271828"
     ],
     "classesTeaching": [],
     "stats": [],
     "_id": "5fd8251c8149c1516f92345b",
     "id": "5fd8251c8149c1516f92345a",
-    "email": "test@test.com",
-    "firstName": "Tanay",
-    "lastName": "Biradar",
-    "password": "$2a$10$fr7gsqfkAH2gew9czPEGzOz1sg5OKjbrkQ7tp3QwU/djvv/X4TcRS",
+    "email": "houyi@example.com",
+    "firstName": "e",
+    "lastName": "chang",
+    "password": "$2y$12$9gLN.tnLDgIZQmEOkv9ZkOrBSnWc8bVaGdmKQzwX06zoJtSNlfEky",
     "isTeacher": false,
     "decks": [
         {
@@ -132,7 +133,7 @@ pages to learn how to get data for decks, reviews, classes, and more.
             "deckId": "5fea66a4635ae125b03e727f",
             "deckName": "Midterm Vocabulary",
             "deckDescription": "Vocabulary for the DLS 2020 spring midterm",
-            "latestAccessDate": 1609381463913,
+            "latestAccessDate": 3141592653589,
             "quizAttempts": [ // an array of all quiz attempts
               ...
             ],
