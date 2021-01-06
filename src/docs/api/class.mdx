@@ -6,10 +6,34 @@ description: The jadeocr class API
 The jadeocr class API handles teachers, students, assignments, and other
 functions to make jadeocr easier to use in the classroom.
 
-## Assign Decks
+
+## Create Class (teachers only)
 
 ### Request
+> This section is not finished yet.
 
+### Response
+> This section is not finished yet.
+
+
+## Delete Class (teachers only)
+
+### Request
+Send a POST request to `https://api.jadeocr.com/api/class/remove` with the
+following body:
+
+|       Key       |        Example Value        |
+|-----------------|-----------------------------|
+| classCode       | 123456                      |
+
+### Response
+If the requester is the teacher of the class, the server will send a `200`
+status code response. Otherwise, it will send an error message in the response.
+
+
+## Assign Decks (teachers only)
+
+### Request
 Send a POST request to `https://api.jadeocr.com/api/class/assign` with the
 following body. Make sure to read the following table carefully:
 
@@ -25,14 +49,44 @@ following body. Make sure to read the following table carefully:
 | dueDate     | 1609719690223              | UNIX epoch time in ms                     |                                                    |         | true     |                                                                                     |
 
 ### Response
-
 > This section is not finished yet.
+
+
+## Join Class (students only)
+
+### Request
+Send a POST request to `https://api.jadeocr.com/api/class/join` with the
+following body:
+
+|       Key       |        Example Value        |
+|-----------------|-----------------------------|
+| classCode       | 123456                      |
+
+### Response
+If the class exists, and student is not already in the class, the server will
+send a `200` status code response. Otherwise, you will receive a `400` with an
+error message.
+
+
+## Leave Class (students only)
+
+### Request
+Send a POST request to `https://api.jadeocr.com/api/class/leave` with the
+following body:
+
+|       Key       |        Example Value        |
+|-----------------|-----------------------------|
+| classCode       | 123456                      |
+
+### Response
+If the class exists, and the requester is a student of that class, the server
+will send a `200` response. Otherwise, the server will send an error message in
+the response.
 
 
 ## Submit reviewed deck (students only)
 
 ### Request
-
 Send a POST request to `https://api.jadeocr.com/api/class/TO_BE_DETERMINED` with the
 following body. Make sure to read the following table carefully. All values
 are required.
@@ -45,7 +99,6 @@ are required.
 | quizResults | myQuizResults              | An object with the quiz results, see [Deck API](/api/deck) for examples    |                                                    | Only needed if mode is "quiz"   |
 
 ### Response
-
 > This section is not finished yet.
 
 ### Note: Client development
