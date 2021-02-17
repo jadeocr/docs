@@ -52,6 +52,18 @@ following body. Make sure to read the following table carefully:
 > This section is not finished yet.
 
 
+## Unassign Decks (teachers only)
+Send a POST request to `https://api.jadeocr.com/api/class/unassign` with the
+following body. The `assignmentId` is the value that comes from getting the
+assignments from a class as a teacher.
+
+|       Key       |        Example Value        |
+|-----------------|-----------------------------|
+| classCode       | 123456                      |
+| deckId          | "5fd8251c8149c1516f92345a"  |
+| assignmentId    | "602c74041ed11d2047853448"  |
+
+
 ## Join Class (students only)
 
 ### Request
